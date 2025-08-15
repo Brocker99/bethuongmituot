@@ -177,19 +177,19 @@ function animate() {
   fallingText.forEach((t, i) => {
     ctx.save();
     ctx.font = `bold ${t.fontSize}px Pacifico`;
-    ctx.fillStyle = `hsla(${t.hue}, 100%, 85%, ${t.alpha})`;
+    ctx.fillStyle = `hsla(${t.hue}, 100%, 50%, 1)`; // alpha cố định = 1, màu đậm hơn
     ctx.shadowBlur = 5;
-    ctx.shadowColor = `hsla(${t.hue}, 100%, 70%, ${t.alpha})`;
+    ctx.shadowColor = `hsla(${t.hue}, 100%, 40%, 1)`;
     ctx.fillText(t.text, t.x, t.y);
     ctx.restore();
 
-    t.y += t.speed;
-    t.alpha -= 0.02;
+    t.y += t.speed; // chỉ di chuyển, không giảm alpha
 
-    if (t.y > height + 30 || t.alpha <= 0) {
-      fallingText.splice(i, 1);
+    if (t.y > height + 30) { // chỉ xóa khi ra khỏi màn hình
+        fallingText.splice(i, 1);
     }
-  });
+});
+
 
   heartstar.forEach((star, i) => {
     star.twinkle += star.twinkleSpeed;
